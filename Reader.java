@@ -13,20 +13,33 @@ public class Reader {
 
         String[] content = titleAndContent[1].split(",");
 
-        int endStateIndex = 0;
+        int endIndex = 0;
         
         // Add states to the AFD
         // States name must start with Q
         for (int i = 0; i < content.length; i++) {
             if(!content[i].toUpperCase().startsWith("Q")) {
-                endStateIndex = i;
+                endIndex = i;
                 break;
             }
 
             afd.states.add(content[i]);
         }
 
-        System.out.println(afd.states.toString());
+        // Add acceptable words to the AFD
+        // Stops on initial state
+        for (int i = endIndex; i < content.length; i++) {
+            if(content[i].toUpperCase().startsWith("Q")) {
+                endIndex = i;
+                break;
+            }
+
+            afd.knownLanguages.add(content[i]);
+        }
+
+        afd.initialState = content[endIndex];
+
+        System.out.println(afd.initialState);
         reader.close();
     }
 }
