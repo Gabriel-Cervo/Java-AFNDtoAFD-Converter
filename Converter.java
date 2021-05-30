@@ -1,7 +1,7 @@
 public class Converter {
-    public static AFND convertAFDtoAFND() {
+    public static Automata convertAFDtoAFND() {
         // TODO: Conversion
-        
-        return new AFND();
+
+        return new Automata();
     }
 }

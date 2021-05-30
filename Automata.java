@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class AFD {
+public class Automata {
     public String name;
     public String initialState;
     public ArrayList<String> states;
@@ -8,7 +8,7 @@ public class AFD {
     public ArrayList<String> knownLanguages;
     public ArrayList<Transition> transitions;
 
-    public AFD() {
+    public Automata() {
         this.name = "";
         this.initialState = "";
         this.states = new ArrayList<String>();

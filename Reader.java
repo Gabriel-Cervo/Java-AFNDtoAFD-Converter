@@ -1,15 +1,15 @@
 import java.io.*;
 
 public class Reader {
-    public static AFD readAFD() throws IOException {
-        AFD afd = new AFD();
+    public static Automata readAutomata() throws IOException {
+        Automata automata = new Automata();
         BufferedReader reader = new BufferedReader(new FileReader("gameShooterAFD.txt"));
         
         String line = reader.readLine();
         line = line.replace("{", "").replace("}", "").replace("(", "").replace(")", "");
      
         String[] titleAndContent = line.split("="); // [0] -> title || [1] -> content
-        afd.name = titleAndContent[0];
+        automata.name = titleAndContent[0];
 
         String[] content = titleAndContent[1].split(",");
 
@@ -23,7 +23,7 @@ public class Reader {
                 break;
             }
 
-            afd.states.add(content[i]);
+            automata.states.add(content[i]);
         }
 
         // Add acceptable words to the AFD
@@ -34,13 +34,13 @@ public class Reader {
                 break;
             }
 
-            afd.knownLanguages.add(content[i]);
+            automata.knownLanguages.add(content[i]);
         }
 
-        afd.initialState = content[endIndex++];
+        automata.initialState = content[endIndex++];
 
         for (int i = endIndex; i < content.length; i++) {
-            afd.finalStates.add(content[i]);
+            automata.finalStates.add(content[i]);
         }
 
         // Read transitions
@@ -52,9 +52,9 @@ public class Reader {
             String[] fromAndWord = transition[0].split(",");
             Transition newTransition = new Transition(fromAndWord[0].trim(), transition[1].trim(), fromAndWord[1].trim());
 
-            afd.transitions.add(newTransition);
+            automata.transitions.add(newTransition);
         }
         reader.close();
-        return afd;
+        return automata;
     }
 }
