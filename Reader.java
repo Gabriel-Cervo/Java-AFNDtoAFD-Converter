@@ -1,7 +1,7 @@
 import java.io.*;
 
 public class Reader {
-    public static void readAFD() throws IOException {
+    public static AFD readAFD() throws IOException {
         AFD afd = new AFD();
         BufferedReader reader = new BufferedReader(new FileReader("gameShooterAFD.txt"));
         
@@ -37,9 +37,24 @@ public class Reader {
             afd.knownLanguages.add(content[i]);
         }
 
-        afd.initialState = content[endIndex];
+        afd.initialState = content[endIndex++];
 
-        System.out.println(afd.initialState);
+        for (int i = endIndex; i < content.length; i++) {
+            afd.finalStates.add(content[i]);
+        }
+
+        // Read transitions
+        while ((line = reader.readLine()) != null) {
+            if(line.toLowerCase().contains("prog")) {
+                continue;
+            }
+            String[] transition = line.replace("(", "").replace(")", "").split("=");
+            String[] fromAndWord = transition[0].split(",");
+            Transition newTransition = new Transition(fromAndWord[0].trim(), transition[1].trim(), fromAndWord[1].trim());
+
+            afd.transitions.add(newTransition);
+        }
         reader.close();
+        return afd;
     }
 }
