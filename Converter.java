@@ -32,33 +32,6 @@ public class Converter {
         afd.knownLanguages = afnd.knownLanguages;
         afd.finalStates = afnd.finalStates;
 
-        // for (int i = 0; i < rows; i++) { // states
-        // for (int j = 0; j < columns; j++) { // transitions
-        // if (afd.initialState == null) {
-        // afd.initialState = rowContent.get(rowPointer);
-        // }
-        // System.out.println(rowPointer);
-
-        // Transition newTransition = new
-        // Transition(rowContent.get(rowPointer).toLowerCase(),
-        // columnContent.get(columnPointer).withState.toLowerCase(),
-        // convertedTransition[rowPointer][columnPointer]);
-        // afd.transitions.add(newTransition);
-
-        // if (!afd.states.contains(rowContent.get(rowPointer).toLowerCase())) {
-        // afd.states.add(rowContent.get(rowPointer).toLowerCase());
-        // }
-        // if
-        // (!afd.states.contains(columnContent.get(columnPointer).withState.toLowerCase()))
-        // {
-        // afd.states.add(columnContent.get(columnPointer).withState.toLowerCase());
-        // }
-        // columnPointer++;
-        // }
-        // rowPointer++;
-        // columnPointer = 0;
-        // }
-
         for (String state : afnd.states) {
             for (Transition transition : afnd.transitions) {
                 if (convertedTransition[rowPointer][columnPointer] == null) {
