@@ -46,7 +46,7 @@ public class Automata {
 
             if ((actualWord.equalsIgnoreCase("F") || actualWord.equalsIgnoreCase("C")
                     || actualWord.equalsIgnoreCase("J"))) {
-                if (word.substring(word.length() - 6, word.length()).trim().equalsIgnoreCase("A2OA1O")) {
+                if (word.substring(word.length() - 6, word.length()).trim().equalsIgnoreCase("A2OA1O") && (!word.contains("A2J") && !word.contains("A1J"))) {
                     return true;
                 }
                 actualState = "q0";
@@ -55,6 +55,10 @@ public class Automata {
             if (lastTransition.equalsIgnoreCase(actualState)) {
                 break;
             }
+        }
+
+        if ((word.contains("A2J") || word.contains("A1J"))) {
+            return false;
         }
 
         return finalStates.contains(actualState);
